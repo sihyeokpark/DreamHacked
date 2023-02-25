@@ -1,26 +1,24 @@
-import { Client, Collection } from 'discord.js'
+import { Client, Collection, SlashCommandBuilder } from 'discord.js'
 
 import Command from './Command'
-import MyClient from './MyClient'
+import { token } from '../settings.json'
 
 export default class Bot {
   private commands: Command[] = []
 
-  constructor(public readonly client: MyClient) {
-    this.client.login(process.env.TOKEN)
+  constructor(public readonly client: Client) {
+    this.client.login(token)
 
-    this.client.commands = 10
+    this.client.commands = new Collection()
 
     this.client.on('ready', () => {
       console.log(`${this.client.user!.username} ready!`)
     })
 
-    this.client.on('messageCreate', (msg) => {
-      if (msg.content == 'hello') msg.reply('efw')
-    })
+    
   }
 
   private initCommand() {
-    this.commands.push(new Command(''))
+    //this.commands.push(new Command(''))
   }
 }

@@ -1,8 +1,15 @@
-import { Client } from 'discord.js'
+import { Client, Collection } from 'discord.js'
+
+import Command from './Command'
+import MyClient from './MyClient'
 
 export default class Bot {
-  constructor(public readonly client: Client) {
+  private commands: Command[] = []
+
+  constructor(public readonly client: MyClient) {
     this.client.login(process.env.TOKEN)
+
+    this.client.commands = 10
 
     this.client.on('ready', () => {
       console.log(`${this.client.user!.username} ready!`)
@@ -11,5 +18,9 @@ export default class Bot {
     this.client.on('messageCreate', (msg) => {
       if (msg.content == 'hello') msg.reply('efw')
     })
+  }
+
+  private initCommand() {
+    this.commands.push(new Command(''))
   }
 }

@@ -5,7 +5,7 @@ const { token } = require('../settings.json')
 export default class Bot {
   commands = []
 
-  constructor(pclient) {
+  constructor(client) {
     this.client.login(token)
 
     this.client.commands = new Collection()
@@ -13,8 +13,6 @@ export default class Bot {
     this.client.on('ready', () => {
       console.log(`${this.client.user.username} ready!`)
     })
-
-    
   }
 
   initCommand() {
